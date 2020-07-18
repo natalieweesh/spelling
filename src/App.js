@@ -14,6 +14,8 @@ function App() {
   const [word, setWord] = useState('');
   const [counting, setCounting] = useState(false);
   const [timesUp, setTimesUp] = useState(false);
+  const [totalAnswered, setTotalAnswered] = useState(0);
+  const [correctAnswered, setCorrectAnswered] = useState(0);
 
   const speak = (words, timeout = 0) => {
     setTimeout(() => {
@@ -33,7 +35,8 @@ function App() {
   }
 
   const checkAnswer = () => {
-    return answer.trim().toLowerCase() === word;
+    const correct = answer.trim().toLowerCase() === word;
+    return correct;
   }
 
   useEffect(() => {
@@ -44,6 +47,10 @@ function App() {
         setTime(0);
         setSubmitted(true);
         setTimesUp(true);
+        setTotalAnswered(totalAnswered + 1);
+        if (checkAnswer()) {
+          setCorrectAnswered(correctAnswered + 1);
+        }
         setTimeout(() => {
           newWordButton.current.focus();
         }, 50)
@@ -59,6 +66,7 @@ function App() {
     <div className="App-header">
       <header>
         <p className="title">Spelling Bee Practice!</p>
+        <p className="score">Your score: {correctAnswered} / {totalAnswered}</p>
       </header>
       <div className="main">
         <div className="timerow">
@@ -71,7 +79,6 @@ function App() {
           setTimesUp(false);
           setAnswer('');
           textBox.current.focus();
-          console.log()
         }}>Gimme a word!</button>}
         {counting && <button onClick={() => {
           speak(word);
@@ -80,9 +87,6 @@ function App() {
         <form onSubmit={(e) => {
           e.preventDefault();
           if (answer.trim().length === 0 || !counting) {
-            console.log(
-              'no length', word.trim().length
-            )
             return;
           }
           setSubmitted(true);
@@ -90,6 +94,10 @@ function App() {
           clearTimeout(timer.current);
           setCounting(false);
           setTime(0);
+          setTotalAnswered(totalAnswered + 1);
+          if (checkAnswer()) {
+            setCorrectAnswered(correctAnswered + 1);
+          }
           setTimeout(() => {
             newWordButton.current.focus();
           }, 50)
