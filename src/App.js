@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import words from './words/words.json';
+import correct from './sounds/correct.m4a';
+import incorrect from './sounds/incorrect.m4a';
 import './App.css';
 
 const TOTAL = 178691;
@@ -7,6 +9,8 @@ const TOTAL = 178691;
 function App() {
   const timer = useRef(null);
   const textBox = useRef(null);
+  const correctSound = useRef(null);
+  const incorrectSound = useRef(null);
   const newWordButton = useRef(null);
   const [answer, setAnswer] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -98,7 +102,10 @@ function App() {
           setTime(0);
           setTotalAnswered(totalAnswered + 1);
           if (checkAnswer()) {
+            correctSound.current.play();
             setCorrectAnswered(correctAnswered + 1);
+          } else {
+            incorrectSound.current.play();
           }
           setTimeout(() => {
             newWordButton.current.focus();
@@ -123,6 +130,14 @@ function App() {
           }}>Skip word</button>}
           <div className={checkAnswer() ? 'right' : 'wrong'}>{submitted && (checkAnswer() ? 'good job' : 'oops! here\'s the correct spelling:')}</div>
           <div>{submitted && !checkAnswer() && word}</div>
+          <div className='audio'>
+          <audio controls ref={correctSound}>
+            <source src={correct} type="audio/mpeg"/>
+          </audio>
+          <audio controls ref={incorrectSound}>
+            <source src={incorrect} type="audio/mpeg"/>
+          </audio>
+          </div>
         </div>
       </div>
     </div>
