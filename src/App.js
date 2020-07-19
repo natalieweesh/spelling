@@ -41,7 +41,9 @@ function App() {
     correctSound.current.currentTime = 0;
     incorrectSound.current.pause();
     incorrectSound.current.currentTime = 0;
-    speak(word);
+    setTimeout(() => {
+      speak(word)
+    }, 50)
   }
 
   const checkAnswer = () => {
