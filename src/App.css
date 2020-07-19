@@ -90,6 +90,10 @@ button {
   font-size: 2rem;
 }
 
+.define {
+  margin-right: 1rem;
+}
+
 .audio {
   display: none;
 }

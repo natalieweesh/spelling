@@ -5,6 +5,7 @@ import incorrect from './sounds/incorrect.mp3';
 import './App.css';
 
 const TOTAL = 178691;
+const POOP = '2143381f-2df4-4aca-a751-a9bde3981dbe';
 
 function App() {
   const timer = useRef(null);
@@ -50,6 +51,22 @@ function App() {
   const checkAnswer = () => {
     const correct = answer.trim().toLowerCase() === word;
     return correct;
+  }
+
+  const define = () => {
+    fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${POOP}`, {
+      method: "GET",
+      credentials: 'omit'
+    }).then(response => response.json()).then((res) => {
+      const def = res[0]['shortdef'] && res[0]['shortdef'][0];
+      if (def) {
+        speak(def)
+      } else {
+        speak('definition unavailable')
+      }
+    }).catch((err) => {
+      console.log('error', err);
+    });
   }
 
   useEffect(() => {
@@ -139,6 +156,7 @@ function App() {
           <button disabled={submitted} type="submit">OK</button>
         </form>
         <div className="feedback">
+          {counting && <button className="define" onClick={define}>Definition?</button>}
           {counting && <button onClick={() => {
             setSubmitted(true);
             console.log('answer', answer)
