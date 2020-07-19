@@ -16,6 +16,7 @@ function App() {
   const [timesUp, setTimesUp] = useState(false);
   const [totalAnswered, setTotalAnswered] = useState(0);
   const [correctAnswered, setCorrectAnswered] = useState(0);
+  const [skipped, setSkipped] = useState(0);
 
   const speak = (words, timeout = 0) => {
     setTimeout(() => {
@@ -67,6 +68,7 @@ function App() {
       <header>
         <p className="title">Spelling Bee Practice!</p>
         <p className="score">Your score: {correctAnswered} / {totalAnswered}</p>
+        <p className="score">Words skipped: {skipped}</p>
       </header>
       <div className="main">
         <div className="timerow">
@@ -106,6 +108,19 @@ function App() {
           <button disabled={submitted} type="submit">OK</button>
         </form>
         <div className="feedback">
+          {counting && <button onClick={() => {
+            setSubmitted(true);
+            console.log('answer', answer)
+            clearTimeout(timer.current);
+            setCounting(false);
+            setTime(0);
+            generateWord();
+            setSubmitted(false);
+            setTimesUp(false);
+            setAnswer('');
+            setSkipped(skipped + 1);
+            textBox.current.focus();
+          }}>Skip word</button>}
           <div className={checkAnswer() ? 'right' : 'wrong'}>{submitted && (checkAnswer() ? 'good job' : 'oops! here\'s the correct spelling:')}</div>
           <div>{submitted && !checkAnswer() && word}</div>
         </div>
