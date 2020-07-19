@@ -9,10 +9,9 @@ const TOTAL = 178691;
 function App() {
   const timer = useRef(null);
   const textBox = useRef(null);
-  // const correctSound = useRef(null);
-  // const incorrectSound = useRef(null);
+  const correctSound = useRef(null);
+  const incorrectSound = useRef(null);
   const newWordButton = useRef(null);
-  const newCorrectSound = useRef(null);
   const [answer, setAnswer] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [time, setTime] = useState(0);
@@ -22,11 +21,8 @@ function App() {
   const [totalAnswered, setTotalAnswered] = useState(0);
   const [correctAnswered, setCorrectAnswered] = useState(0);
   const [skipped, setSkipped] = useState(0);
+  const [soundPlaying, setSoundPlaying] = useState(false);
 
-  useEffect(() => {
-    newCorrectSound.current = new Audio();
-    newCorrectSound.current.play();
-  }, [])
   const speak = (words, timeout = 0) => {
     setTimeout(() => {
       const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
@@ -42,12 +38,10 @@ function App() {
     setTime(30);
     // setTime(5);
     setCounting(true);
-    newCorrectSound.current.pause();
-    newCorrectSound.current.currentTime = 0;
-    // correctSound.current.pause();
-    // correctSound.current.currentTime = 0;
-    // incorrectSound.current.pause();
-    // incorrectSound.current.currentTime = 0;
+    correctSound.current.pause();
+    correctSound.current.currentTime = 0;
+    incorrectSound.current.pause();
+    incorrectSound.current.currentTime = 0;
     setTimeout(() => {
       speak(word)
     }, 50)
@@ -68,18 +62,19 @@ function App() {
         setTimesUp(true);
         setTotalAnswered(totalAnswered + 1);
         if (checkAnswer()) {
-          // correctSound.current.play();
           setCorrectAnswered(correctAnswered + 1);
-          newCorrectSound.current.src = correct;
-          newCorrectSound.current.play();
+          correctSound.current.play().then(() => setSoundPlaying(true));
+          correctSound.current.addEventListener('ended', (res) => {
+            setSoundPlaying(false);
+            newWordButton.current.focus();
+          })
         } else {
-          // incorrectSound.current.play();
-          newCorrectSound.current.src = incorrect;
-          newCorrectSound.current.play();
+          incorrectSound.current.play().then(() => setSoundPlaying(true));
+          incorrectSound.current.addEventListener('ended', (res) => {
+            setSoundPlaying(false);
+            newWordButton.current.focus();
+          })
         }
-        setTimeout(() => {
-          newWordButton.current.focus();
-        }, 50)
       } else {
         timer.current = setTimeout(() => {
           setTime(time - 1);
@@ -100,7 +95,7 @@ function App() {
           <div className="timesup">{timesUp && 'time\'s up'}</div>
           {counting && <div className="time">{time}</div>}
         </div>
-        {!counting && <button ref={newWordButton} disabled={counting} onClick={(e) => {
+        {!counting && <button ref={newWordButton} disabled={counting || soundPlaying} onClick={(e) => {
           generateWord();
           setSubmitted(false);
           setTimesUp(false);
@@ -123,14 +118,18 @@ function App() {
           setTime(0);
           setTotalAnswered(totalAnswered + 1);
           if (checkAnswer()) {
-            // correctSound.current.play();
+            correctSound.current.play().then(() => setSoundPlaying(true));
+            correctSound.current.addEventListener('ended', (res) => {
+              setSoundPlaying(false);
+              newWordButton.current.focus();
+            })
             setCorrectAnswered(correctAnswered + 1);
-            newCorrectSound.current.src = correct;
-            newCorrectSound.current.play();
           } else {
-            // incorrectSound.current.play();
-            newCorrectSound.current.src = incorrect;
-            newCorrectSound.current.play();
+            incorrectSound.current.play().then(() => setSoundPlaying(true));
+            incorrectSound.current.addEventListener('ended', (res) => {
+              setSoundPlaying(false);
+              newWordButton.current.focus();
+            })
           }
           setTimeout(() => {
             newWordButton.current.focus();
@@ -156,12 +155,12 @@ function App() {
           <div className={checkAnswer() ? 'right' : 'wrong'}>{submitted && (checkAnswer() ? 'good job' : 'oops! here\'s the correct spelling:')}</div>
           <div>{submitted && !checkAnswer() && word}</div>
           <div className="audio">
-          {/* <audio controls ref={correctSound}>
+          <audio controls ref={correctSound}>
             <source src={correct} type="audio/mpeg"/>
           </audio>
           <audio controls ref={incorrectSound}>
             <source src={incorrect} type="audio/mpeg"/>
-          </audio> */}
+          </audio>
           </div>
         </div>
       </div>
