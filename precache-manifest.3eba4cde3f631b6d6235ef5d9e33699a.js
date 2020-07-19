@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "11f4971f06eee3f937501d9e7038927e",
+    "revision": "34377243dbc501482f73c287374c5f73",
     "url": "/spelling/index.html"
   },
   {
-    "revision": "c633dcfb62ba37872daa",
+    "revision": "1a1cd35266047771ed4b",
     "url": "/spelling/static/css/main.fa2c7d2e.chunk.css"
   },
   {
@@ -16,19 +16,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/spelling/static/js/2.e252f658.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c633dcfb62ba37872daa",
-    "url": "/spelling/static/js/main.9dc58835.chunk.js"
+    "revision": "1a1cd35266047771ed4b",
+    "url": "/spelling/static/js/main.6d134998.chunk.js"
   },
   {
     "revision": "5e1da7418c32d63f75a2",
     "url": "/spelling/static/js/runtime-main.0a3de7fc.js"
   },
   {
-    "revision": "cdc1e30598a5354814cb1ccf20b73b5a",
-    "url": "/spelling/static/media/correct.cdc1e305.m4a"
+    "revision": "cd69a88f740581f486d311634016d67d",
+    "url": "/spelling/static/media/correct.cd69a88f.mp3"
   },
   {
-    "revision": "9a2e9161123b33092feb0c41b304db9d",
-    "url": "/spelling/static/media/incorrect.9a2e9161.m4a"
+    "revision": "6fc72bdb3e0dd3ed65e25091e5e6b10e",
+    "url": "/spelling/static/media/incorrect.6fc72bdb.mp3"
   }
 ]);
