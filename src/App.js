@@ -20,7 +20,7 @@ function App() {
 
   const speak = (words, timeout = 0) => {
     setTimeout(() => {
-      window.responsiveVoice.speak(words, "US English Male")
+      window.responsiveVoice.speak(words, "US English Female")
     }, timeout)
   }
 
