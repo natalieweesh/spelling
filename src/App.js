@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import words from './words/words.json';
+import words from './words/twl18.json';
 import correct from './sounds/correct.mp3';
 import incorrect from './sounds/incorrect.mp3';
 import './App.css';
