@@ -98,7 +98,11 @@ button {
 .audio {
   display: none;
 }
-
+.smallText {
+  padding-top: 4rem;
+  font-size: 1rem;
+  text-align: center;
+}
 @media (max-width: 700px) {
   form {
     flex-direction: column;

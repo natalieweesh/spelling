@@ -184,6 +184,7 @@ function App() {
           </div>
         </div>
       </div>
+      <span className="smallText">This game uses the official Scrabble Tournament Word List from 2018.</span>
     </div>
   );
 }
