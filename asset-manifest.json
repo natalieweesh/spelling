@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/spelling/static/css/main.30902690.chunk.css",
-    "main.js": "/spelling/static/js/main.48673992.chunk.js",
-    "main.js.map": "/spelling/static/js/main.48673992.chunk.js.map",
+    "main.js": "/spelling/static/js/main.97d7463f.chunk.js",
+    "main.js.map": "/spelling/static/js/main.97d7463f.chunk.js.map",
     "runtime-main.js": "/spelling/static/js/runtime-main.0a3de7fc.js",
     "runtime-main.js.map": "/spelling/static/js/runtime-main.0a3de7fc.js.map",
     "static/js/2.e252f658.chunk.js": "/spelling/static/js/2.e252f658.chunk.js",
     "static/js/2.e252f658.chunk.js.map": "/spelling/static/js/2.e252f658.chunk.js.map",
     "index.html": "/spelling/index.html",
-    "precache-manifest.06a8b577f482ab5cd04c0526806fa6be.js": "/spelling/precache-manifest.06a8b577f482ab5cd04c0526806fa6be.js",
+    "precache-manifest.bd5b2a1fd978d76a443873ac2524531b.js": "/spelling/precache-manifest.bd5b2a1fd978d76a443873ac2524531b.js",
     "service-worker.js": "/spelling/service-worker.js",
     "static/css/main.30902690.chunk.css.map": "/spelling/static/css/main.30902690.chunk.css.map",
     "static/js/2.e252f658.chunk.js.LICENSE.txt": "/spelling/static/js/2.e252f658.chunk.js.LICENSE.txt",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.0a3de7fc.js",
     "static/js/2.e252f658.chunk.js",
     "static/css/main.30902690.chunk.css",
-    "static/js/main.48673992.chunk.js"
+    "static/js/main.97d7463f.chunk.js"
   ]
 }
