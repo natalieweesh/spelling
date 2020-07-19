@@ -37,6 +37,10 @@ function App() {
     setTime(30);
     // setTime(5);
     setCounting(true);
+    correctSound.pause();
+    correctSound.currentTime = 0;
+    incorrectSound.pause();
+    incorrectSound.currentTime = 0;
     speak(word);
   }
 
