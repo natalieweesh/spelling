@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import words from './words/words.json';
-import correct from './sounds/correct.m4a';
-import incorrect from './sounds/incorrect.m4a';
+import correct from './sounds/correct.mp3';
+import incorrect from './sounds/incorrect.mp3';
 import './App.css';
 
 const TOTAL = 178691;
@@ -24,7 +24,8 @@ function App() {
 
   const speak = (words, timeout = 0) => {
     setTimeout(() => {
-      window.responsiveVoice.speak(words, "US English Female")
+      const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+      window.responsiveVoice.speak(words, isChrome ? "UK English Female" : "US English Female")
     }, timeout)
   }
 
@@ -54,7 +55,10 @@ function App() {
         setTimesUp(true);
         setTotalAnswered(totalAnswered + 1);
         if (checkAnswer()) {
+          correctSound.current.play();
           setCorrectAnswered(correctAnswered + 1);
+        } else {
+          incorrectSound.current.play();
         }
         setTimeout(() => {
           newWordButton.current.focus();
@@ -111,7 +115,7 @@ function App() {
             newWordButton.current.focus();
           }, 50)
         }}>
-          <input ref={textBox} type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} />
+          <input ref={textBox} type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
           <button disabled={submitted} type="submit">OK</button>
         </form>
         <div className="feedback">
@@ -130,7 +134,7 @@ function App() {
           }}>Skip word</button>}
           <div className={checkAnswer() ? 'right' : 'wrong'}>{submitted && (checkAnswer() ? 'good job' : 'oops! here\'s the correct spelling:')}</div>
           <div>{submitted && !checkAnswer() && word}</div>
-          <div className='audio'>
+          <div className="audio">
           <audio controls ref={correctSound}>
             <source src={correct} type="audio/mpeg"/>
           </audio>
