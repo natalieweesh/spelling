@@ -23,6 +23,7 @@ function App() {
   const [correctAnswered, setCorrectAnswered] = useState(0);
   const [skipped, setSkipped] = useState(0);
   const [soundPlaying, setSoundPlaying] = useState(false);
+  const [numScoops, setNumScoops] = useState(0);
 
   const speak = (words, timeout = 0) => {
     setTimeout(() => {
@@ -69,6 +70,15 @@ function App() {
     });
   }
 
+  const getScoops = () => {
+    let scoops = new Array(numScoops).fill('0');
+    return <div className="scoops">
+      {scoops.map((s, i) => {
+        return <scoop></scoop>
+      })}
+    </div>
+  }
+
   useEffect(() => {
     if (counting) {
       if (time === 0) {
@@ -80,12 +90,14 @@ function App() {
         setTotalAnswered(totalAnswered + 1);
         if (checkAnswer()) {
           setCorrectAnswered(correctAnswered + 1);
+          setNumScoops(numScoops + 1);
           correctSound.current.play().then(() => setSoundPlaying(true));
           correctSound.current.addEventListener('ended', (res) => {
             setSoundPlaying(false);
             newWordButton.current.focus();
           })
         } else {
+          setNumScoops(0);
           incorrectSound.current.play().then(() => setSoundPlaying(true));
           incorrectSound.current.addEventListener('ended', (res) => {
             setSoundPlaying(false);
@@ -141,7 +153,9 @@ function App() {
               newWordButton.current.focus();
             })
             setCorrectAnswered(correctAnswered + 1);
+            setNumScoops(numScoops + 1);
           } else {
+            setNumScoops(0);
             incorrectSound.current.play().then(() => setSoundPlaying(true));
             incorrectSound.current.addEventListener('ended', (res) => {
               setSoundPlaying(false);
@@ -183,6 +197,10 @@ function App() {
           </audio>
           </div>
         </div>
+      </div>
+      <div className="iceCream">
+        {numScoops > 0 && getScoops()}
+        <cone></cone>
       </div>
       <span className="smallText">This game uses the official Scrabble Tournament Word List from 2018.</span>
     </div>
