@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1a814fabd60e5f89d25fd48b2770a46b",
+    "revision": "768ddf30526902f8839c2d19c8d10007",
     "url": "/spelling/index.html"
   },
   {
-    "revision": "5b651f0ab7f657f79173",
-    "url": "/spelling/static/css/main.df4ee03c.chunk.css"
+    "revision": "40dc69e054a7ae087a12",
+    "url": "/spelling/static/css/main.2a6d59d7.chunk.css"
   },
   {
     "revision": "965ec4a0c63a69bc6aee",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/spelling/static/js/2.e252f658.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5b651f0ab7f657f79173",
-    "url": "/spelling/static/js/main.87727751.chunk.js"
+    "revision": "40dc69e054a7ae087a12",
+    "url": "/spelling/static/js/main.b924ac3e.chunk.js"
   },
   {
     "revision": "5e1da7418c32d63f75a2",
