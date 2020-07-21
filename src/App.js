@@ -43,6 +43,7 @@ function App() {
   const speakMan = (words, timeout = 0) => {
     setTimeout(() => {
       var to_speak = new SpeechSynthesisUtterance(words);
+      to_speak.voice = window.speechSynthesis.getVoices().filter((x) => x.lang === 'en-GB')[0];
       window.speechSynthesis.speak(to_speak);
     }, timeout)
   }
