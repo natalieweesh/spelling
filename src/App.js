@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import words from './words/twl18.json';
+import scrabbleWords from './words/twl18.json';
+import satWords from './words/sat.json';
 import correct from './sounds/correct.mp3';
 import incorrect from './sounds/incorrect.mp3';
 import './App.css';
 
-const TOTAL = 178691;
 const POOP = '2143381f-2df4-4aca-a751-a9bde3981dbe';
 
 function App() {
@@ -25,6 +25,7 @@ function App() {
   const [soundPlaying, setSoundPlaying] = useState(false);
   const [numScoops, setNumScoops] = useState(0);
   const [maleVoice, setMaleVoice] = useState(false);
+  const [scrabbleMode, setScrabbleMode] = useState(false);
 
   const speak = (words) => {
     if (maleVoice) {
@@ -50,8 +51,9 @@ function App() {
   }
 
   const generateWord = () => {
-    const rand = Math.floor(Math.random() * TOTAL);
-    const word = words[rand];
+    const wordList = scrabbleMode ? scrabbleWords : satWords;
+    const rand = Math.floor(Math.random() * wordList.length);
+    const word = wordList[rand];
     setWord(word);
     console.log('word', word);
     setTime(30);
@@ -132,6 +134,7 @@ function App() {
   return (
     <div className="App-header">
       <button className="voiceSwitch" onClick={() => setMaleVoice(!maleVoice)}>switch voice<br/>to {maleVoice ? 'female' : 'male'}</button>
+      <button className="wordSwitch" onClick={() => setScrabbleMode(!scrabbleMode)}>switch to <br/>{scrabbleMode ? 'sat' : 'scrabble'} words</button>
       <header>
         <p className="title">Spelling Bee Practice!</p>
         <p className="score">Your score: {correctAnswered} / {totalAnswered}</p>
