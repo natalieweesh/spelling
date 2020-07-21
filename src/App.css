@@ -149,6 +149,13 @@ scoop:nth-child(2n+1), scoop:nth-child(2n+1):after {
 scoop:nth-child(3n+1), scoop:nth-child(3n+1):after {
   background: #64f9ae;
 }
+.voiceSwitch {
+  font-size: 0.6rem;
+  padding: 0.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 @media (max-width: 700px) {
   form {
     flex-direction: column;

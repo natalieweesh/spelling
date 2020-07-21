@@ -24,11 +24,26 @@ function App() {
   const [skipped, setSkipped] = useState(0);
   const [soundPlaying, setSoundPlaying] = useState(false);
   const [numScoops, setNumScoops] = useState(0);
+  const [maleVoice, setMaleVoice] = useState(false);
 
-  const speak = (words, timeout = 0) => {
+  const speak = (words) => {
+    if (maleVoice) {
+      speakMan(words)
+    } else {
+      speakWoman(words)
+    }
+  }
+  const speakWoman = (words, timeout = 0) => {
     setTimeout(() => {
       const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
       window.responsiveVoice.speak(words, isChrome ? "UK English Female" : "US English Female")
+    }, timeout)
+  }
+
+  const speakMan = (words, timeout = 0) => {
+    setTimeout(() => {
+      var to_speak = new SpeechSynthesisUtterance(words);
+      window.speechSynthesis.speak(to_speak);
     }, timeout)
   }
 
@@ -114,6 +129,7 @@ function App() {
 
   return (
     <div className="App-header">
+      <button className="voiceSwitch" onClick={() => setMaleVoice(!maleVoice)}>switch voice<br/>to {maleVoice ? 'female' : 'male'}</button>
       <header>
         <p className="title">Spelling Bee Practice!</p>
         <p className="score">Your score: {correctAnswered} / {totalAnswered}</p>
